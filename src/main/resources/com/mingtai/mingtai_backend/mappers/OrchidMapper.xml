@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mingtai.mingtai_backend.mappers.OrchidMapper">
+
+    <resultMap id="orchidMap" type="com.mingtai.mingtai_backend.pojos.Orchid">
+        <id property="id" column="id" javaType="int"/>
+        <result property="parent_id" column="parent_id" javaType="int"/>
+        <result property="orchid_name" column="orchid_name" javaType="String"/>
+        <result property="category_id" column="category_id" javaType="int"/>
+        <result property="content" column="content" javaType="String" />
+    </resultMap>
+
+    <select id="getAllOrchids" resultMap="orchidMap">
+        SELECT * FROM orchid
+    </select>
+
+    <insert id="insertOrchid">
+        INSERT INTO orchid(orchid_name, category_id, content, create_time)
+        VALUES (
+                   #{orchid.orchid_name},
+                   #{orchid.category_id},
+                   #{orchid.content},
+                    NOW()
+               )
+    </insert>
+    <insert id = "insertChildOrchid">
+        INSERT INTO orchid(orchid_name, parent_id ,category_id, content, create_time)
+        VALUES (
+                #{orchid.orchid_name},
+                #{orchid.parent_id},
+                #{orchid.category_id},
+                #{orchid.content},
+                NOW()
+                )
+    </insert>
+
+    <delete id="deleteOrchid">
+        DELETE FROM orchid WHERE id = #{id}
+    </delete>
+
+    <update id = "updateDeleteOrchidParentID">
+        UPDATE orchid SET parent_id = NULL WHERE parent_id = #{id}
+    </update>
+
+    <update id = "updateOrchidWhenDeleteSubCategory">
+        UPDATE orchid
+        SET category_id = #{new_id}
+        WHERE category_id = #{original_id}
+
+    </update>
+
+    <update id="updateOrchid">
+        UPDATE orchid
+        SET orchid_name =
+            CASE
+                WHEN #{orchid.orchid_name} = NULL THEN orchid_name
+                ELSE #{orchid.orchid_name}
+            END,
+            parent_id =
+                CASE
+                    WHEN #{orchid.parent_id} = 0 THEN parent_id
+                    ELSE #{orchid.parent_id}
+                    END,
+            content =
+                CASE
+                    WHEN #{orchid.content} = NULL THEN content
+                    ELSE #{orchid.content}
+                    END,
+            category_id =
+                CASE
+                    WHEN #{orchid.category_id} = 0 THEN category_id
+                    ELSE #{orchid.category_id}
+                    END,
+            modified_time = NOW()
+        WHERE id = #{id}
+    </update>
+</mapper>
+
+

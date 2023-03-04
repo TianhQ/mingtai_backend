@@ -11,11 +11,12 @@ public interface CategoryService {
     List<Category> getAllCategories();
 
     //add category
-    boolean addMainCategory(Category category);
-    boolean addSubCategory(Category category);
+    boolean addCategory(Category category);
 
     boolean deleteCategory(int id);
 
+    boolean updateCategory(int id, Category category);
 
+    Integer getParentID(int id);
 
 }

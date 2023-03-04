@@ -29,6 +29,10 @@ public class CategoryController {
 //        return Result.success(list);
 //    }
 
+    @GetMapping("/categories/isPrimary")
+    public Integer isPrimary(@RequestParam(value = "id") int id){
+        return categoryService.getParentID(id);
+    }
 
     @GetMapping("/categories")
     public List<Category> getAllCategories(){
@@ -37,10 +41,9 @@ public class CategoryController {
 
     @PostMapping("/categories")
     public boolean addCategory(@RequestBody Category category){
-        if(category.getParent_id() == 0){
-            return categoryService.addMainCategory(category);
-        }
-        return categoryService.addSubCategory(category);
+        System.out.println(category);
+
+        return categoryService.addCategory(category);
     }
 
     @DeleteMapping("/categories")
@@ -48,5 +51,10 @@ public class CategoryController {
         return categoryService.deleteCategory(id);
     }
 
+    @PutMapping("/categories")
+    public boolean updateCategory(@RequestParam(value = "id") int id, @RequestBody Category category){
+        System.out.println(category);
+        return categoryService.updateCategory(id, category);
+    }
 
 }

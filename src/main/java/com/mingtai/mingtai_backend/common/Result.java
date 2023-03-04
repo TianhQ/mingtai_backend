@@ -30,6 +30,6 @@ public class Result<T> {
         Result rs = new Result<>();
         rs.setCode(code);
         rs.setMsg(msg);
-        return rs;
+        return rs; 
     }
 }

@@ -17,8 +17,6 @@ public interface CategoryMapper {
 
     List<Category> getAllCategories();
 
-
-
 //    Category queryCategoryById(@Param("id") int id);
 //
     boolean addMainCategory(Category category);
@@ -26,13 +24,18 @@ public interface CategoryMapper {
 
 
 
-    boolean deleteCategory(int id);
+    boolean deleteCategory(@Param("id") int id);
+
 //
 //    boolean deleteCategory(@Param("id") int id);
 //
 //    boolean updateUser(Category category);
 //
     List<Category> getChildren();
+
+    Integer getParentID(@Param("id") int id);
+
+    boolean updateCategory(@Param("id") int id, @Param("category") Category category);
 
 
 

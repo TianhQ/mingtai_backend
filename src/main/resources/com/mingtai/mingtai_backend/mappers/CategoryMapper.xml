@@ -15,7 +15,7 @@
     </resultMap>
 
     <select id="getAllCategories" resultMap="categoryMap">
-        select * from category where hierarchy_id= 1
+        select * from category where hierarchy_id = 1
     </select>
 
 
@@ -32,12 +32,31 @@
     </select>
 
     <delete id="deleteCategory" parameterType="int">
-        DELETE FROM category WHERE id = #{id}
+        DELETE FROM category WHERE id =  #{id}
     </delete>
 
 
-<!--    <delete id="deleteCategory" parameterType="com.mingtai.mingtai_backend.pojos.Category">-->
+    <update id="updateCategory" >
+        UPDATE category
+        SET parent_id = CASE
+            WHEN #{category.parent_id} = 0 THEN parent_id
+            ELSE #{category.parent_id}
+            END,
+            hierarchy_id = CASE
+            WHEN #{category.hierarchy_id} = 0 THEN hierarchy_id
+            ELSE #{category.hierarchy_id}
+            END,
+            category_name= CASE
+            WHEN #{category.category_name} = NULL THEN  category_name
+            ELSE #{category.category_name}
+                    END,
+             modified_time = NOW()
+        WHERE id = #{id}
+    </update>
 
-<!--    </delete>-->
-
+    <select id="getParentID" resultType="Integer">
+        SELECT parent_id
+        FROM category
+        WHERE id = #{id}
+    </select>
 </mapper>
