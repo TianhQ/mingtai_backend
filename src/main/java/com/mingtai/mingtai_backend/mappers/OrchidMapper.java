@@ -15,8 +15,9 @@ public interface OrchidMapper {
 
     boolean updateOrchid( @Param("id") int id, @Param("orchid") Orchid orchid);
 
-    boolean updateDeleteOrchidParentID(@Param("id") int id, @Param("parent_id") int parent_id);
+    boolean updateDeleteOrchidParentID(@Param("id") int id);
     boolean insertChildOrchid(@Param("orchid") Orchid orchid);
+    boolean updateOrchidWhenDeleteSubCategory( @Param("original_id") int original_id, @Param("new_id") Integer new_id);
+    List<Orchid> getOrchidsByCategoryId(@Param("id") int id);
 
-    boolean updateOrchidWhenDeleteSubCategory( @Param("original_id") int original_id, @Param("new_id") int new_id);
 }

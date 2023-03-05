@@ -2,7 +2,7 @@ package com.mingtai.mingtai_backend.controllers;
 
 import com.mingtai.mingtai_backend.configs.ApiVersion;
 import com.mingtai.mingtai_backend.pojos.Orchid;
-import com.mingtai.mingtai_backend.services.OrchidService;
+import com.mingtai.mingtai_backend.services.interfaces.OrchidService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

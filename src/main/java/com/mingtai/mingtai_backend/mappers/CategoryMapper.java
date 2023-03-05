@@ -31,12 +31,11 @@ public interface CategoryMapper {
 //
 //    boolean updateUser(Category category);
 //
-    List<Category> getChildren();
+    List<Category> getChildren(@Param("id") int id);
 
     Integer getParentID(@Param("id") int id);
 
     boolean updateCategory(@Param("id") int id, @Param("category") Category category);
-
 
 
 

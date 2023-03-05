@@ -1,18 +1,12 @@
 package com.mingtai.mingtai_backend.controllers;
 
-import com.mingtai.mingtai_backend.common.Result;
 import com.mingtai.mingtai_backend.configs.ApiVersion;
 import com.mingtai.mingtai_backend.pojos.Category;
-import com.mingtai.mingtai_backend.services.CategoryService;
-import org.springframework.context.annotation.Bean;
+import com.mingtai.mingtai_backend.services.interfaces.CategoryService;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.config.annotation.CorsRegistration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import javax.annotation.Resource;
 import java.util.List;
-
-import static org.apache.ibatis.ognl.DynamicSubscript.all;
 
 //@CrossOrigin(origins = {"http://localhost:3000", "null"})
 @RestController

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mingtai.mingtai_backend.mappers.InventoryMapper">
+
+    <resultMap id="inventoryMap" type="com.mingtai.mingtai_backend.pojos.Inventory">
+        <id property="id" column="id" javaType="int"/>
+        <result property="orchid_id" column="orchid_id" javaType="int"/>
+        <result property="category_id" column="category_id" javaType="int"/>
+        <result property="location_id" column="location_id" javaType="int"/>
+        <result property="inventory_status_id" column="inventory_status_id" javaType="int"/>
+        <result property="stock_movement_id" column="stock_movement_id" javaType="int"/>
+        <result property="quantity" column="quantity" javaType="int"/>
+        <result property="expiration_time" column="expiration_time" javaType="java.sql.Timestamp"/>
+        <result property="create_by" column="create_by" javaType="int"/>
+        <result property="modified_by" column="modified_by" javaType="int"/>
+
+    </resultMap>
+
+    <select id="selectAllInventories" resultMap="inventoryMap">
+        SELECT * FROM inventory
+    </select>
+    <insert id="insertInventory">
+        INSERT INTO inventory(
+                              orchid_id,
+                              category_id,
+                              location_id,
+                              inventory_status_id,
+                              stock_movement_id,
+                              quantity,
+                              expiration_time,
+                              create_by,
+                              modified_by)
+        VALUES (
+                   #{inventory.orchid_id},
+                   #{inventory.category_id},
+                   #{inventory.location_id},
+                   #{inventory.inventory_status_id},
+                   #{inventory.stock_movement_id},
+                   #{inventory.quantity},
+}                  #{inventory.expiration_time},
+                   #{inventory.create_by},
+                   #{inventory.modified_by}
+               )
+    </insert>
+    <delete id="deleteInventory">
+        DELETE FROM inventory WHERE id = #{id}
+    </delete>
+    <update id="updateInventory">
+        UPDATE inventory
+        SET orchid_id =
+                CASE
+                    WHEN #{inventory.orchid_id} = NULL THEN orchid_id
+                    ELSE #{inventory.orchid_id}
+                    END,
+            category_id =
+                CASE
+                    WHEN #{inventory.category_id} = 0 THEN category_id
+                    ELSE #{inventory.category_id}
+                    END,
+            location_id =
+                CASE
+                    WHEN #{inventory.location_id} = 0 THEN location_id
+                    ELSE #{inventory.location_id}
+                    END,
+            inventory_status_id =
+                CASE
+                    WHEN #{inventory.inventory_status_id} = 0 THEN inventory_status_id
+                    ELSE #{inventory.inventory_status_id}
+                    END,
+            stock_movement_id =
+                CASE
+                    WHEN #{inventory.stock_movement_id} = 0 THEN stock_movement_id
+                    ELSE #{inventory.stock_movement_id}
+                    END,
+            quantity =
+                CASE
+                    WHEN #{inventory.quantity} = 0 THEN quantity
+                    ELSE #{inventory.quantity}
+                    END,
+            expiration_time =
+                CASE
+                    WHEN #{inventory.expiration_time} = NULL THEN expiration_time
+                    ELSE #{inventory.expiration_time}
+                    END,
+            create_by =
+                CASE
+                    WHEN #{inventory.create_by} = NULL THEN create_by
+                    ELSE #{inventory.create_by}
+                    END,
+            modified_time = "cur user"
+        WHERE id = #{id}
+    </update>
+</mapper>

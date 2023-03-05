@@ -39,12 +39,12 @@
     </delete>
 
     <update id = "updateDeleteOrchidParentID">
-        UPDATE orchid SET parent_id = NULL WHERE parent_id = #{id}
+        UPDATE orchid SET parent_id = NULL, modified_time = NOW()  WHERE parent_id = #{id}
     </update>
 
     <update id = "updateOrchidWhenDeleteSubCategory">
         UPDATE orchid
-        SET category_id = #{new_id}
+        SET category_id = #{new_id}, modified_time = NOW()
         WHERE category_id = #{original_id}
 
     </update>
@@ -74,6 +74,11 @@
             modified_time = NOW()
         WHERE id = #{id}
     </update>
+
+
+    <select id="getOrchidsByCategoryId" resultMap="orchidMap">
+        SELECT * FROM orchid WHERE category_id = #{id}
+    </select>
 </mapper>
 
 

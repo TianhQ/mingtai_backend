@@ -1,4 +1,4 @@
-package com.mingtai.mingtai_backend.services;
+package com.mingtai.mingtai_backend.services.interfaces;
 
 import com.mingtai.mingtai_backend.pojos.Category;
 import org.springframework.stereotype.Service;

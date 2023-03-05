@@ -3,7 +3,7 @@ package com.mingtai.mingtai_backend.pojos;
 import lombok.Data;
 
 @Data
-public class StorageStatus {
+public class StockMovementStatus {
     private int id;
-    private String storage_status_name;
+    private String stock_movement_status_name;
 }
