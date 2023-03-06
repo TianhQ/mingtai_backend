@@ -6,5 +6,6 @@
         <typeAlias alias="LinkedHashMap" type="java.util.LinkedHashMap" />
         <typeAlias alias="ArrayList" type="java.util.ArrayList" />
         <typeAlias alias="LinkedList" type="java.util.LinkedList" />
+        <typeAlias alias="TimeStamp" type="java.sql.Timestamp" />
     </typeAliases>
 </configuration>
