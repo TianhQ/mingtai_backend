@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mingtai.mingtai_backend.mappers.UserMapper">
+    <resultMap id="userMap" type="com.mingtai.mingtai_backend.pojos.User">
+        <id property="id" column="id" javaType="int"/>
+        <result property="firstname" column="firstname" javaType="String"/>
+        <result property="lastname" column="lastname" javaType="String"/>
+        <result property="email" column="email" javaType="String"/>
+        <result property="number" column="number" javaType="String"/>
+        <result property="username" column="username" javaType="String"/>
+        <result property="password" column="password" javaType="String"/>
+        <result property="role" column="role" javaType="String"/>
+        <result property="expiration_time" column="expiration_time" javaType="java.sql.Timestamp"/>
+        <result property="enabled" column="enabled" javaType="boolean"/>
+        <result property="accountNonLocked" column="accountNonLocked" javaType="boolean"/>
+    </resultMap>
+
+    <insert id="saveUser">
+        INSERT INTO user (
+                        firstname,
+                        lastname,
+                        username,
+                        password,
+                        role
+        )
+        VALUES (
+                #{user.firstname},
+                #{user.lastname},
+                #{user.username},
+                #{user.password},
+                #{user.role}
+               )
+
+    </insert>
+
+    <select id="loadUserByUsername" resultMap="userMap">
+        SELECT * FROM user WHERE username = #{userMapper}
+    </select>
+</mapper>
